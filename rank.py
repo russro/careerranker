@@ -121,7 +121,7 @@ if __name__ == "__main__":
 
         # Choice context loop
         while True:
-            print(f'\n\n------------\n{a} | VS. | {b}\n------------')
+            print(f'\n\n------------\n\n{a}\n\n| VS |\n\n{b}\n\n------------')
             print(f"Click '{left}' for left. Click '{rght}' for right. Press {quit} to save and quit.")
             choice = getch()
             print(f'You typed: {choice}')
