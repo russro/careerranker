@@ -7,3 +7,5 @@ If you want rank your own decisions, do the following:
 2. Delete ```elos.json```
 3. Keep ```choice_data.csv``` but clear its contents
 4. Run ```python3 rank.py``` in the terminal
+
+```choice_data.csv``` keeps a record of the choices you make, so you can can perform subsequent data analysis on which features are most predictive of the choice you make.
