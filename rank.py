@@ -5,6 +5,7 @@ import termios
 import tty
 import json
 import random
+import csv
 
 from datetime import datetime
 
@@ -131,7 +132,7 @@ if __name__ == "__main__":
                 result = 0
                 break
             elif choice == quit:
-                write_json_file(elos, file_path)
+                write_json_file(elos, elos_path)
                 print('File saved.')
                 break
             else:
@@ -151,6 +152,6 @@ if __name__ == "__main__":
         # Record result
         date, time =  datetime.now().strftime("%m/%d/%Y"), datetime.now().strftime("%I:%M:%S %p")
         with open(choice_data_path, mode='w') as choice_data:
-            choice_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            choice_writer = csv.writer(choice_data, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
             choice_writer.writerow([date, time, elos[a], elos[b], result])
