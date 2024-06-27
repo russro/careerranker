@@ -151,7 +151,7 @@ if __name__ == "__main__":
 
         # Record result
         date, time =  datetime.now().strftime("%m/%d/%Y"), datetime.now().strftime("%I:%M:%S %p")
-        with open(choice_data_path, mode='w') as choice_data:
+        with open(choice_data_path, mode='a') as choice_data:
             choice_writer = csv.writer(choice_data, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-            choice_writer.writerow([date, time, elos[a], elos[b], result])
+            choice_writer.writerow([date, time, a, elos[a], b, elos[b], result])
