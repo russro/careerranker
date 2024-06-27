@@ -1,4 +1,4 @@
-# careerranker uses the elo rating system to score from life choices.
+# careerranker uses the elo rating system to score and rank your life choices.
 
 Life choices are string combinations of 'locations', career 'types', and job 'titles'. These elements can be edited within the ```rank.py``` file.
 
