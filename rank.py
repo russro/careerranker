@@ -128,7 +128,10 @@ if __name__ == "__main__":
 
         # Shuffle list
         entries = set(entries) # Converting to set removes duplicates
-        entries.remove(0) # Remove skipped entries
+        try:
+            entries.remove(0) # Remove skipped entries
+        except:
+            pass
 
         # Assign elos:
         elos = {}
