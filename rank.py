@@ -8,6 +8,7 @@ import random
 import csv
 
 from datetime import datetime
+from scipy.special import softmax
 
 
 locs = [
@@ -51,9 +52,34 @@ def elo_rating(player1_rating, player2_rating, player1_result, k=32):
     player2_new_rating = update_ratings(player2_rating, player1_rating, 1 - player1_result, k)
     return player1_new_rating, player2_new_rating
 
-def sample_two_keys(dic):
-    sample = random.sample(dic.keys(), 2)
-    return sample
+def sample_two_keys(dic: dict):
+    a, b = random.sample(list(dic.keys()), 2)
+    return a, b
+
+def sample_balanced_matchmaking(dic: dict):
+    '''Instead of evenly sampling two keys without replacing, sampling is weighted
+    with higher probabilities given to elos that are close to the first sampled entry.
+    '''
+    # Init dict keys and vals
+    keys = list(dic.keys())
+    elos = list(dic.values())
+
+    # Init sample
+    a = random.sample(keys, 1)[0] # first sample
+    a_elo = dic[a]
+    a_idx = keys.index(a) # return idx of key for a
+
+    # Probabilities for the second entry is the softmax of the negative abs distance from the first sample elo
+    # distances are negative bc higher (closer to zero) vals should have higher probs
+    dist = [-abs(elo - a_elo) for elo in elos]
+    dist[a_idx] = -50000 # set the idx for the sample to an arbitrarily low number
+    probs = softmax(dist)
+    probs[a_idx] = 0 # confirm the idx for sample to be zero
+
+    # Weighted sampling
+    b = random.choices(keys, weights=probs, k=1)[0]
+
+    return a, b
 
 def getch():
     fd = sys.stdin.fileno()
@@ -81,7 +107,6 @@ def write_json_file(data, file_path):
         print(f"Data successfully written to {file_path}")
     except IOError:
         print(f"Error: Unable to write to file {file_path}")
-
 
 
 if __name__ == "__main__":
@@ -117,7 +142,8 @@ if __name__ == "__main__":
     # Start sampling and updating elos
     while True:
         # Sample two
-        a, b = sample_two_keys(elos)
+        # a, b = sample_two_keys(elos)
+        a, b = sample_balanced_matchmaking(elos)
 
         # Choice context loop
         while True:
