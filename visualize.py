@@ -11,7 +11,7 @@ def sort_dict_asc(dic: dict) -> list | list:
 	return sorted_keys, sorted_vals
 
 def generate_two_barh(labels: str, values: float, k: int = 10, save_path: str ="summary_stats.png",
-	tick_rot: int = 0, xlim: int = 50) -> None:
+	tick_rot: int = 0, xlim: int = 25) -> None:
 	
 	y_pos = np.arange(len(labels[-k:]))
 
@@ -22,7 +22,7 @@ def generate_two_barh(labels: str, values: float, k: int = 10, save_path: str ="
 	top_vals = values[-k:]
 	plt.barh(y_pos, top_vals, color='limegreen') # label-value pairs are sorted in asc order so grab top k
 	plt.yticks(y_pos, top_labs, rotation=tick_rot)
-	plt.xlim(left=top_vals[0]-xlim)
+	plt.xlim(left=top_vals[0]-xlim, right=top_vals[-1]+xlim)
 	plt.title(f"Top {k} Career Choices")
 	plt.xlabel("Elo")
 
@@ -31,7 +31,7 @@ def generate_two_barh(labels: str, values: float, k: int = 10, save_path: str ="
 	bot_vals = values[:k]
 	plt.barh(y_pos, bot_vals, color='red')
 	plt.yticks(y_pos, bot_labs, rotation=tick_rot)
-	plt.xlim(left=bot_vals[0]-xlim)
+	plt.xlim(left=bot_vals[0]-xlim, right=bot_vals[-1]+xlim)
 	plt.title(f"Bottom {k} Career Choices")
 	plt.xlabel("Elo")
 
