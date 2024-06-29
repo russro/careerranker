@@ -11,7 +11,7 @@ def sort_dict_asc(dic: dict) -> list | list:
 	sorted_vals = [item[1] for item in sorted_dict]
 	return sorted_keys, sorted_vals
 
-def generate_two_barh(labels: str, values: float, k: int = 10, save_path: str ="summary_stats.png",
+def generate_two_barh(labels: str, values: float, k: int = 12, save_path: str ="summary_stats.png",
 	tick_rot: int = 0, xlim: int = 25) -> None:
 	
 	y_pos = np.arange(len(labels[-k:]))
@@ -38,7 +38,7 @@ def generate_two_barh(labels: str, values: float, k: int = 10, save_path: str ="
 
 	date, time =  datetime.now().strftime("%m/%d/%Y"), datetime.now().strftime("%I:%M:%S %p")
 
-	plt.figtext(0.01, 0.01, f"Last Updated: {date}, {time}", 
+	plt.figtext(0.01, 0.01, f"Last Updated: {date}, {time}",
          horizontalalignment='left', 
          verticalalignment='bottom')
 
