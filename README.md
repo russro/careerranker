@@ -1,3 +1,4 @@
+## current decision rankings
 ![summary_stats](summary_stats.png)
 
 # careerranker uses the elo rating system to score and rank your life choices.
