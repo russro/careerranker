@@ -6,6 +6,7 @@ import tty
 import json
 import random
 import csv
+import visualize
 
 from datetime import datetime
 from scipy.special import softmax
@@ -163,6 +164,8 @@ if __name__ == "__main__":
             elif choice == quit:
                 write_json_file(elos, elos_path)
                 print('File saved.')
+                visualize.sort_and_generate(elos)
+                print('Summary stats graph generated.')
                 break
             else:
                 print(f'Invalid input. Press {left} for left. Press {rght} for right. Press {quit} to save and quit.')
