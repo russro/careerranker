@@ -156,7 +156,7 @@ if __name__ == "__main__":
         if cnt >= 5:
             a, _ = sample_two_keys(elos)
             cnt = 0
-            print(f'\n\n\nNow playing as: {a}')
+            print(f'\n\n\nNOW PLAYING AS:\n\n{a}')
         else:
             cnt += 1
         a, b = sample_balanced_matchmaking(elos, a)
