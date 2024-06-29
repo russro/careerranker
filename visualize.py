@@ -3,6 +3,7 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 
+from datetime import datetime
 
 def sort_dict_asc(dic: dict) -> list | list:
 	sorted_dict = sorted(dic.items(), key=lambda x: x[1])
@@ -34,6 +35,12 @@ def generate_two_barh(labels: str, values: float, k: int = 10, save_path: str ="
 	plt.xlim(left=bot_vals[0]-xlim, right=bot_vals[-1]+xlim)
 	plt.title(f"Bottom {k} Career Choices")
 	plt.xlabel("Elo")
+
+	date, time =  datetime.now().strftime("%m/%d/%Y"), datetime.now().strftime("%I:%M:%S %p")
+
+	plt.figtext(0.01, 0.01, f"Last Updated: {date}, {time}", 
+         horizontalalignment='left', 
+         verticalalignment='bottom')
 
 	plt.tight_layout()
 
