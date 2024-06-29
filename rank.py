@@ -57,7 +57,7 @@ def sample_two_keys(dic: dict):
     a, b = random.sample(list(dic.keys()), 2)
     return a, b
 
-def sample_balanced_matchmaking(dic: dict):
+def sample_balanced_matchmaking(dic: dict, a = None):
     '''Instead of evenly sampling two keys without replacing, sampling is weighted
     with higher probabilities given to elos that are close to the first sampled entry.
     '''
@@ -66,7 +66,10 @@ def sample_balanced_matchmaking(dic: dict):
     elos = list(dic.values())
 
     # Init sample
-    a = random.sample(keys, 1)[0] # first sample
+    if a == None:
+        a = random.sample(keys, 1)[0]
+    else:
+        a = a
     a_elo = dic[a]
     a_idx = keys.index(a) # return idx of key for a
 
@@ -144,10 +147,20 @@ if __name__ == "__main__":
     print(f'Press {left} for left. Press {rght} for right. Press {quit} to save and quit.')
 
     # Start sampling and updating elos
+    cnt = 5
     while True:
-        # Sample two
         # a, b = sample_two_keys(elos)
-        a, b = sample_balanced_matchmaking(elos)
+        # a, b = sample_balanced_matchmaking(elos)
+        
+        # Sample the first decision and match it with {cnt} opponents
+        if cnt >= 5:
+            a, _ = sample_two_keys(elos)
+            cnt = 0
+            print(f'\n\n\nNow playing as: {a}')
+        else:
+            cnt += 1
+        a, b = sample_balanced_matchmaking(elos, a)
+
 
         # Choice context loop
         while True:
